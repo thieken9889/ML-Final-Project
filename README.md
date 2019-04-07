@@ -25,4 +25,6 @@ False Positive Rate - When diagnosing we are okay with more false positives
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6093039/
 http://cs231n.github.io/transfer-learning/ 
 https://medium.com/datadriveninvestor/detecting-pneumonia-with-deep-learning-a-soft-introduction-to-convolutional-neural-networks-b3c6b6c23a88
-Rohit Panjala
+
+
+hello
