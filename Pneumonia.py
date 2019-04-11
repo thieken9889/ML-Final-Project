@@ -16,6 +16,13 @@ from torchvision.utils import make_grid
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
+# If your laptop has a cuda device then use it, otherwise, just do everything on the cpu
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+# Assuming that we are on a CUDA machine, this should print a CUDA device:
+print(device)
+# this device should be used to send all of the networks and tensors to it like "model.to(device)"
+
 # create transforms for data
 # TODO we need to normalize the dataset!!!
 nrow = 64 # nrow x nrow image
