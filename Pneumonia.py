@@ -1,3 +1,12 @@
+import os
+import numpy as np
+import torch
+from torchvision.datasets import ImageFolder
+from torchvision.transforms import transforms
+from torchvision.utils import make_grid
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
+
 '''
 Pneumonia predicting algorithm.
 Final project for ML 4194.02, SP19:
@@ -7,14 +16,7 @@ Final project for ML 4194.02, SP19:
     like this: .../ML_Final_Project/ML-Final-Project/chest_xray/ '''
 
 
-import os
-import numpy as np
-import torch
-from torchvision.datasets import ImageFolder
-from torchvision.transforms import transforms
-from torchvision.utils import make_grid
-from torch.utils.data import DataLoader
-import matplotlib.pyplot as plt
+
 
 # If your laptop has a cuda device then use it, otherwise, just do everything on the cpu
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
