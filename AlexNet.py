@@ -20,7 +20,7 @@ print(device)
 
 # load the data
 datadir = 'chest_xray'
-train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
+train_dl, test_dl = data_wrangler(datadir, 128)
 
 # load pre-trained AlexNet
 model = torchvision.models.alexnet(pretrained=True)
@@ -55,6 +55,8 @@ opt = optim.Adam(model.parameters(), lr=lr)
 
 
 # train and test the model over several epochs
+print('training...')
+
 num_epoch = 5
 
 a_tr_loss = np.zeros([num_epoch])
