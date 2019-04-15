@@ -23,7 +23,7 @@ datadir = 'chest_xray'
 train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
 
 # load pre-trained AlexNet
-model = torchvision.models.alexnet(pretrained=True)
+model = torchvision.models.vgg16(pretrained=True)
 print(str(model))
 
 # freeze the gradients for the pre-trained network
