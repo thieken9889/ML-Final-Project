@@ -22,7 +22,7 @@ print(device)
 
 # load the data
 datadir = 'chest_xray'
-train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
+train_dl, test_dl = data_wrangler(datadir, 64, batch_size=10)
 
 # load pre-trained AlexNet
 model = torchvision.models.squeezenet1_0(pretrained=True)
