@@ -5,6 +5,7 @@ import torch.optim as optim
 import torchvision
 from data_wrangler import data_wrangler
 import time
+import matplotlib.pyplot as plt
 
 
 print("torch.cuda.is_available()   =", torch.cuda.is_available())

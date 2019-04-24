@@ -6,6 +6,7 @@ import torchvision
 from data_wrangler import data_wrangler
 import time
 from torchsummary import summary
+import matplotlib.pyplot as plt
 
 
 print("torch.cuda.is_available()   =", torch.cuda.is_available())
