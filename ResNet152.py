@@ -5,8 +5,6 @@ import torch.optim as optim
 import torchvision
 from data_wrangler import data_wrangler
 import time
-import matplotlib
-import matplotlib.pyplot as plt
 
 
 print("torch.cuda.is_available()   =", torch.cuda.is_available())
@@ -25,7 +23,7 @@ datadir = 'chest_xray'
 train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
 
 # load pre-trained AlexNet
-model = torchvision.models.vgg16_bn(pretrained=True)
+model = torchvision.models.resnet152(pretrained=True)
 # print(str(model))
 
 # freeze the gradients for the pre-trained network
@@ -33,8 +31,8 @@ for param in model.parameters():
     param.requires_grad = False
 
 # rearrange the classifier
-model.classifier = nn.Sequential(nn.Dropout(p=0.5),
-                                 nn.Linear(in_features=25088, out_features=256, bias=True),
+model.fc = nn.Sequential(nn.Dropout(p=0.5),
+                                 nn.Linear(in_features=2048, out_features=256, bias=True),
                                  nn.ReLU(),
                                  nn.Dropout(p=0.5),
                                  nn.Linear(in_features=256, out_features=1, bias=True),
@@ -151,11 +149,3 @@ for epoch in range(num_epoch):
           + 'Train Accuracy: {0:.2f}    Test Loss: {1:.3f}   '.format(a_tr_accuracy[epoch], a_ts_loss[epoch])
           + 'Test Accuracy: {0:.2f}    '.format(a_ts_accuracy[epoch])
           + 'Duration: {0:.2f}'.format(epoch_time))
-
-plt.plot(a_tr_accuracy)
-plt.plot(a_ts_accuracy)
-plt.grid()
-plt.xlabel('epochs')
-plt.ylabel('accuracy')
-plt.legend(['training accuracy', 'test accuracy'])
-plt.show()

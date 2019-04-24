@@ -7,10 +7,10 @@ from data_wrangler import data_wrangler
 import time
 
 
-# print("torch.cuda.is_available()   =", torch.cuda.is_available())
-# print("torch.cuda.device_count()   =", torch.cuda.device_count())
-# print("torch.cuda.device('cuda')   =", torch.cuda.device('cuda'))
-# print("torch.cuda.current_device() =", torch.cuda.current_device())
+print("torch.cuda.is_available()   =", torch.cuda.is_available())
+print("torch.cuda.device_count()   =", torch.cuda.device_count())
+print("torch.cuda.device('cuda')   =", torch.cuda.device('cuda'))
+print("torch.cuda.current_device() =", torch.cuda.current_device())
 
 # If your laptop has a cuda device then use it, otherwise, just do everything on the cpu
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
