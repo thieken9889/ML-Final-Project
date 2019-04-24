@@ -153,3 +153,11 @@ for epoch in range(num_epoch):
           + 'Train Accuracy: {0:.2f}    Test Loss: {1:.3f}   '.format(a_tr_accuracy[epoch], a_ts_loss[epoch])
           + 'Test Accuracy: {0:.2f}    '.format(a_ts_accuracy[epoch])
           + 'Duration: {0:.2f}'.format(epoch_time))
+
+plt.plot(a_tr_accuracy)
+plt.plot(a_ts_accuracy)
+plt.grid()
+plt.xlabel('epochs')
+plt.ylabel('accuracy')
+plt.legend(['training accuracy', 'test accuracy'])
+plt.show()
