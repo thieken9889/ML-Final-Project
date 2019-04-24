@@ -5,6 +5,7 @@ import torch.optim as optim
 import torchvision
 from data_wrangler import data_wrangler
 import time
+from torchsummary import summary
 
 
 print("torch.cuda.is_available()   =", torch.cuda.is_available())
@@ -24,20 +25,21 @@ train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
 
 # load pre-trained AlexNet
 model = torchvision.models.squeezenet1_0(pretrained=True)
-print(str(model))
+#print(str(model))
 
 # freeze the gradients for the pre-trained network
 for param in model.parameters():
     param.requires_grad = False
 
 # rearrange the classifier
-# model.classifier = nn.Sequential(nn.Dropout(p=0.5),
-#                                  nn.Linear(in_features=153600, out_features=3, bias=True),
-#                                  nn.ReLU(),
-#                                  nn.Dropout(p=0.5),
-#                                  nn.Linear(in_features=3, out_features=1, bias=True),
-#                                  nn.Sigmoid())
-print(str(model.classifier))
+model.classifier = nn.Sequential(nn.Dropout(p=0.5),
+                                 nn.Conv2d(in_channels=512, out_channels=1, bias=True, kernel_size=(1, 1), stride=(1, 1)),
+                                 nn.ReLU(inplace=True),
+                                 nn.AdaptiveAvgPool2d(output_size=(1, 1)))
+# print(str(model.classifier))
+
+# summary from https://discuss.pytorch.org/t/how-to-print-output-shape-of-each-layer/1587/2
+summary(model, (3, 224, 224))
 
 # # print the requires_grad parameter to make sure we are training the last few layers
 # for param in model.parameters():
@@ -83,6 +85,8 @@ for epoch in range(num_epoch):
 
         # send the data to the device
         x_batch, y_batch = x_batch.to(device), y_batch.to(device)
+
+        print(x_batch.shape)
 
         out = model(x_batch)        #gives 100000 elements
         print(out.shape)            #has shape [100,1000]
