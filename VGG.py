@@ -7,10 +7,10 @@ from data_wrangler import data_wrangler
 import time
 
 
-#print("torch.cuda.is_available()   =", torch.cuda.is_available())
-#print("torch.cuda.device_count()   =", torch.cuda.device_count())
-#print("torch.cuda.device('cuda')   =", torch.cuda.device('cuda'))
-#print("torch.cuda.current_device() =", torch.cuda.current_device())
+# print("torch.cuda.is_available()   =", torch.cuda.is_available())
+# print("torch.cuda.device_count()   =", torch.cuda.device_count())
+# print("torch.cuda.device('cuda')   =", torch.cuda.device('cuda'))
+# print("torch.cuda.current_device() =", torch.cuda.current_device())
 
 # If your laptop has a cuda device then use it, otherwise, just do everything on the cpu
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -24,7 +24,7 @@ train_dl, test_dl = data_wrangler(datadir, 64, batch_size=100)
 
 # load pre-trained AlexNet
 model = torchvision.models.vgg16(pretrained=True)
-print(str(model))
+# print(str(model))
 
 # freeze the gradients for the pre-trained network
 for param in model.parameters():
@@ -32,12 +32,12 @@ for param in model.parameters():
 
 # rearrange the classifier
 model.classifier = nn.Sequential(nn.Dropout(p=0.5),
-                                 nn.Linear(in_features=9216, out_features=256, bias=True),
+                                 nn.Linear(in_features=25088, out_features=256, bias=True),
                                  nn.ReLU(),
                                  nn.Dropout(p=0.5),
                                  nn.Linear(in_features=256, out_features=1, bias=True),
                                  nn.Sigmoid())
-print(str(model.classifier))
+print(str(model))
 
 # # print the requires_grad parameter to make sure we are training the last few layers
 # for param in model.parameters():
