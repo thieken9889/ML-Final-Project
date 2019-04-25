@@ -21,7 +21,7 @@ print(device)
 
 # load the data
 datadir = 'chest_xray'
-train_dl, test_dl = data_wrangler(datadir, 64, batch_size=10)
+train_dl, test_dl = data_wrangler(datadir, 128, batch_size=10)
 
 # load pre-trained AlexNet
 model = torchvision.models.resnet152(pretrained=True)
@@ -33,10 +33,10 @@ for param in model.parameters():
 
 # rearrange the classifier
 model.fc = nn.Sequential(nn.Dropout(p=0.5),
-                                 nn.Linear(in_features=2048, out_features=256, bias=True),
+                                 nn.Linear(in_features=2048, out_features=512, bias=True),
                                  nn.ReLU(),
                                  nn.Dropout(p=0.5),
-                                 nn.Linear(in_features=256, out_features=1, bias=True),
+                                 nn.Linear(in_features=512, out_features=1, bias=True),
                                  nn.Sigmoid())
 print(str(model))
 
@@ -157,4 +157,5 @@ plt.grid()
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend(['Training Accuracy', 'Test Accuracy'])
+plt.title('ResNet-152: 128x128, 512 Neurons')
 plt.show()

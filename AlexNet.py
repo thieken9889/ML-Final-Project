@@ -21,7 +21,7 @@ print(device)
 
 # load the data
 datadir = 'chest_xray'
-train_dl, test_dl = data_wrangler(datadir, 128, batch_size=10)
+train_dl, test_dl = data_wrangler(datadir, 64, batch_size=10)
 
 # load pre-trained AlexNet
 model = torchvision.models.alexnet(pretrained=True)
@@ -157,5 +157,5 @@ plt.grid()
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend(['Training Accuracy', 'Test Accuracy'])
-plt.title('AlexNet: 128x128, 256 Neurons, No Batch Norm')
+plt.title('AlexNet: 64x64, 256 Neurons')
 plt.show()
